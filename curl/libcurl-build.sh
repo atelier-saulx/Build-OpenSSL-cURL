@@ -36,7 +36,7 @@ trap 'echo -e "${alert}** ERROR with Build - Check /tmp/curl*.log${alertdim}"; t
 # Set defaults
 CURL_VERSION="curl-7.74.0"
 nohttp2="0"
-catalyst="0"
+catalyst="1"
 FORCE_SSLV3="no"
 
 # Set minimum OS versions for target
@@ -244,7 +244,7 @@ buildMac()
 
 	pushd . > /dev/null
 	cd "${CURL_VERSION}"
-	./configure -prefix="/tmp/${CURL_VERSION}-${ARCH}" --disable-shared --enable-static -with-random=/dev/urandom --with-ssl=${OPENSSL}/Mac ${NGHTTP2CFG} --host=${HOST} --disable-ldap --disable-ldaps --without-libidn2 --without-zstd --without-libpsl &> "/tmp/${CURL_VERSION}-${ARCH}.log"
+	./configure -prefix="/tmp/${CURL_VERSION}-${ARCH}" --disable-shared --enable-static -with-random=/dev/urandom --with-ssl=${OPENSSL}/Mac ${NGHTTP2CFG} --host=${HOST} --disable-ldap --disable-ldaps --without-libidn2 --without-zstd --without-libpsl --without-nghttp2 &> "/tmp/${CURL_VERSION}-${ARCH}.log"
 
 	make -j${CORES} >> "/tmp/${CURL_VERSION}-${ARCH}.log" 2>&1
 	make install >> "/tmp/${CURL_VERSION}-${ARCH}.log" 2>&1
